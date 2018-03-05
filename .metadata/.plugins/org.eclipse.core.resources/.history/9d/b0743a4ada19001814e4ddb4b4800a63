@@ -1,0 +1,67 @@
+'''
+Created on Feb 17, 2018
+
+@author: ckont
+'''
+import pygame
+
+pygame.init()
+
+# resolution of game, tuple of width x height
+display_width = 800
+display_height = 600
+gameDisplay = pygame.display.set_mode((display_width, display_height))
+
+black = (0, 0, 0)
+# 256 options, including 0
+white = (255, 255, 255)
+red = (255, 0, 0)
+green = (0, 255, 0)
+light_blue= (56, 255,228)
+
+boatImg= pygame.image.load('transBoat.png')
+
+#put boat in background display
+#x,y must be a tuple
+def boat(x,y):
+    gameDisplay.blit(boatImg, (x,y))
+
+
+x= (display_width * 0.45)
+y = (display_height * 0.8)
+boat(x,y)
+
+#coordinate system review
+#0,0 is top left
+#as you add to x, you move right
+#as you add to y, you move down
+
+
+# title of window
+pygame.display.set_caption("Speedy af")
+
+# clock times things (fps)
+clock = pygame.time.Clock()
+
+# game loop is logic for the game, needs a way to stop (crashing)
+crashed = False
+
+while not crashed:
+    # gets any event (click, keyboard, etc), per frame
+    # quit is when you click the X
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            crashed = True
+        #print(event)
+    #we have to paint white FIRST
+    gameDisplay.fill(white)
+    boat(x,y)
+    
+    # updates the thing in parameter
+    pygame.display.update()
+    # how fast is this updating? (put FPS at a parameter)
+    clock.tick(60)
+    
+# quitting pygame and python
+pygame.quit()
+quit()
